@@ -23,6 +23,12 @@ MLX_INC = -I $(MLX_PATH)
 
 all: $(NAME)
 
+$(MLX_LIB):
+	@echo "$(YELLOW)Compiling MiniLibX...$(NC)"
+	@cd $(MLX_PATH) && ./configure && make
+
+all: $(MLX_LIB) $(NAME)
+
 $(NAME): $(OBJS) $(INC) $(MLX_LIB)
 	@$(CC) $(CFLAGS) $(OBJS) $(MLX_LIB) -o $(NAME) -lXext -lX11 -lm
 	@echo "$(GREEN)Compilation complete! \n$(YELLOW)$(NAME) is ready to execute.$(NC)"
